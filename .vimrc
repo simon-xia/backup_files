@@ -69,3 +69,5 @@ hi cLogicalOperatorError    guifg=#3EFFE2
 :inoremap ' ''<esc>i
 :inoremap " ""<esc>i
 :inoremap < <><esc>i
+
+
