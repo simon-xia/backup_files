@@ -6,19 +6,24 @@ set softtabstop=4
 set shiftwidth=4
 set cindent shiftwidth=4     " 自动缩进4空格
 set autoindent               " 自动对齐  
-colorscheme  desert           " 着色模式
-""colorscheme  simon           
+
 set cursorline              " 突出显示当前行 
 set cursorcolumn
+" 设置高亮行列颜色
+:hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+:hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+" \c to turn on or off
+:nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
+
 set hlsearch                 "搜索高亮
 set incsearch                "动态搜索高亮
 ""set bg=light
 set bg=dark
 "set guifont=Consolas:h12       " 字体 && 字号  
 
-set t_Co=256       "256色
+""set t_Co=256       "256色
 
-hi Normal ctermfg=252 ctermbg=none
+"hi Normal ctermfg=252 ctermbg=none
 
 syntax enable
 syntax on
@@ -40,7 +45,7 @@ set completeopt=longest,menu
 :inoremap " ""<esc>i
 ":inoremap < <><esc>i
 
-""""""""""process space between words in Ubuntu 14.04 
+""""""""""handle space between words in Ubuntu 14.04 
 if has("gui_gtk2")
 	set guifont=DejaVu\ Sans\ Mono\ 12
 elseif has("gui_macvim")
@@ -79,18 +84,12 @@ Plugin 'yegappan/taglist'
 Plugin 'vim-scripts/winmanager'
 "jump between *.c and *.h files
 Plugin 'vim-scripts/a.vim'
-"Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-"Plugin 'L9'
-" Git plugin not hosted on GitHub
-"Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-"Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Avoid a name conflict with L9
-"Plugin 'user/L9', {'name': 'newL9'}
+"keep the same color display in terminal as in GUI
+Plugin 'godlygeek/csapprox'
+"highlight c/c++ func"
+Plugin 'octol/vim-cpp-enhanced-highlight'
+
+
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -213,18 +212,19 @@ nnoremap <silent> <F3> :Grep<CR>
 "endf
 
 
-nmap <C-Space>s :scs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <C-Space>g :scs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <C-Space>c :scs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <C-Space>t :scs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <C-Space>e :scs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <C-Space>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <C-Space>i :scs find i <C-R>=expand("<cfile>")<CR><CR>
-nmap <C-Space>d :scs find d <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>s :scs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>g :scs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>c :scs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>t :scs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>e :scs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-\>i :scs find i <C-R>=expand("<cfile>")<CR><CR>
+nmap <C-\>d :scs find d <C-R>=expand("<cword>")<CR><CR>
 
 
 " Insert current time
-:inoremap <F11> <C-R>=strftime("%FT%T%z")<CR>
+" conflict with full screen F11
+":inoremap <F11> <C-R>=strftime("%FT%T%z")<CR>
 
 " hilight one column 
 map ,ch :call SetColorColumn()<CR>
@@ -238,3 +238,18 @@ function! SetColorColumn()
     endif
 endfunction
 
+" terminal cursor
+if has("autocmd")
+    au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
+    au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+    au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
+endif
+
+set t_Co=256
+
+"CSApprox plugin, make display in terminal the same as in GUI
+let g:CSApprox_attr_map = { 'bold' : 'bold', 'italic' : '', 'sp' : '' }
+""colorscheme wombat_simon           " 着色模式
+"colorscheme wombat256_simon	" 着色模式
+colorscheme wombat256_modified	" 着色模式
+"colorscheme molokai	" 着色模式
