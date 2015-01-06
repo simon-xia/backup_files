@@ -1144,16 +1144,6 @@ The taglist plugin provides several global functions that can be used from
 other Vim plugins to interact with the taglist plugin. These functions are
 described below.
 
-|Tlist_Update_File_Tags()|		Update the tags for the specified file
-|Tlist_Get_Tag_Prototype_By_Line()|	Return the prototype of the tag at or
-				    	before the specified line number in the
-				    	specified file.
-|Tlist_Get_Tagname_By_Line()|		Return the name of the tag at or
-					before the specified line number in
-					the specified file.
-|Tlist_Set_App()|			Set the name of the application
-					controlling the taglist window.
-
 					    *Tlist_Update_File_Tags()*
 Tlist_Update_File_Tags({filename}, {filetype})
 		Update the tags for the file {filename}. The second argument
