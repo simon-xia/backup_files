@@ -1,4 +1,5 @@
 set encoding=utf-8 "设置中文字符编码 
+set fileencodings=utf-8,gbk
 set nu!            "显示行号
 set smartindent    "智能自动缩进
 set tabstop=4    "设置自动缩进和tab宽度 
