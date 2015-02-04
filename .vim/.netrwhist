@@ -1,8 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_cnt =7
 let g:netrw_dirhist_1='/home/simon'
 let g:netrw_dirhist_2='/home/simon/homework'
 let g:netrw_dirhist_3='/home/simon'
 let g:netrw_dirhist_4='/home/simon/homework'
 let g:netrw_dirhist_5='/home/simon'
 let g:netrw_dirhist_6='/home/simon/homework'
+let g:netrw_dirhist_7='/home/simon/wine-git/include'
