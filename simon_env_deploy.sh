@@ -4,7 +4,8 @@ mv ~/.vim ~/.vim_backup
 mv ~/.vimrc ~/.vimrc_backup
 cp $(pwd)/.vimrc ~/.vimrc
 cp -R $(pwd)/.vim ~/.vim
-cp $(pwd)/.vim/colorscheme/* /usr/share/vim/vim74/colors/
+sudo cp $(pwd)/.vim/colors/* /usr/share/vim/vim74/colors/
+sudo cp .vim/colors/* /usr/local/share/vim/vim74/colors/
 
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 vim +PluginInstall +qall

@@ -8,6 +8,8 @@ set shiftwidth=4
 set cindent shiftwidth=4     " 自动缩进4空格
 set autoindent               " 自动对齐  
 
+"colorscheme wombat256_modified	
+colorscheme gruvbox	
 
 set cursorline              " 突出显示当前行 
 set cursorcolumn
@@ -383,7 +385,6 @@ set t_Co=256
 
 "CSApprox plugin, make display in terminal the same as in GUI
 let g:CSApprox_attr_map = { 'bold' : 'bold', 'italic' : '', 'sp' : '' }
-colorscheme wombat256_modified	
 "
 " forbid display menu and toolbar
 set guioptions-=m
@@ -410,4 +411,3 @@ vnoremap <C-S-v> "+p
 
 " for wine Unicode char
 :vmap ,u "zda{<C-R>=substitute(substitute(@z, '\(.\)', "'\\1',", "g"), "'\\(['\\\\]\\)'", "'\\\\\\1'", "g")<CR><ESC>a'\0'}<ESC>
-

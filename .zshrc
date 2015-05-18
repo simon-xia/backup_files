@@ -87,10 +87,12 @@ alias vi='vim'
 alias grep="grep --color=auto"
 alias h="history"
 
+#tmux lose vim colorscheme
+alias tmux="TERM=screen-256color-bce tmux"
+
 export LANG="zh_CN.UTF-8"
 export LC_ALL="zh_CN.UTF-8"
 
-export TERM=xterm-256color
 #my golang env
 export GOROOT=$HOME/go
 export GOBIN=$GOROOT/bin
