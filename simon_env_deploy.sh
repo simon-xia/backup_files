@@ -15,5 +15,8 @@ sudo apt-get install zsh
 wget https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O - | sh
 cp $(pwd)/.zshrc ~/.zshrc
 
+# tmux
+cp $(pwd)/.tmux.conf ~/.tmux.conf
+
 # replace mawk with gawk
 sudo apt-get install  gawk
