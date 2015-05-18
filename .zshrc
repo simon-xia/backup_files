@@ -90,7 +90,7 @@ alias h="history"
 export LANG="zh_CN.UTF-8"
 export LC_ALL="zh_CN.UTF-8"
 
-
+export TERM=xterm-256color
 #my golang env
 export GOROOT=$HOME/go
 export GOBIN=$GOROOT/bin
