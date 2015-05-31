@@ -82,10 +82,12 @@ source $ZSH/oh-my-zsh.sh
 #
 
 alias cls='clear'
-alias ll='ls -al'
+alias ll='ls -alF'
 alias vi='vim'
 alias grep="grep --color=auto"
 alias h="history"
+alias rm="rm -i"
+alias gcc99="gcc -std=c99"
 
 #tmux lose vim colorscheme
 alias tmux="TERM=screen-256color-bce tmux"
