@@ -203,8 +203,8 @@ let g:ycm_show_diagnostics_ui = 0 "turn off diagnostics
 "mapping
 nmap <leader>gd :YcmDiags<CR>
 nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>           " 跳转到申明处
-nnoremap <leader>g :YcmCompleter GoToDefinition<CR>            " 跳转到定义处
-nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <leader>gg :YcmCompleter GoToDefinition<CR>            " 跳转到定义处
+nnoremap <leader>ge :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " 黑名单,不启用
 let g:ycm_filetype_blacklist = {
       \ 'tagbar' : 1,
@@ -309,10 +309,14 @@ hi MBEVisibleActiveChanged guifg=#F1266F guibg=fg
 " change tab
 nnoremap <C-S-l> :bn<CR>
 nnoremap <C-S-h> :bN<CR>
+" change tab without write
+set hidden
 
 " a.vim jump between *.c and *.h files
 "nnoremap <silent> <F12> :A<CR>
-nnoremap <leader>a :A<CR>
+nnoremap <leader>aa :A<CR>
+nnoremap <leader>av :AV<CR>
+
 
 " indentLine plugin
 "":set expandtab
