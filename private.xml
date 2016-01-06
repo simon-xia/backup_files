@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<root>
+    <devicevendordef>
+        <vendorname>CHERRY_KEYBORD</vendorname>
+        <vendorid>0x04b4</vendorid>
+    </devicevendordef>
+
+    <deviceproductdef>
+        <productname>PC_KEYBOARD</productname>
+        <productid>0x0101</productid>
+    </deviceproductdef>
+
+    <item>
+        <name>Simon keycool KEYBOARD</name>
+        <identifier>private.deviceproductdef</identifier>
+        <device_only>DeviceVendor::CHERRY_KEYBORD, DeviceProduct::PC_KEYBOARD</device_only>
+        <identifier>private.remap.pc_to_mac</identifier>
+
+        <autogen>__KeyToKey__ KeyCode::COMMAND_L, KeyCode::OPTION_L</autogen>
+        <autogen>__KeyToKey__ KeyCode::OPTION_L, KeyCode::COMMAND_L</autogen>
+        <autogen>__KeyToKey__ KeyCode::PC_APPLICATION, KeyCode::OPTION_R</autogen>
+        <autogen>__KeyToKey__ KeyCode::OPTION_R, KeyCode::COMMAND_R</autogen>
+
+    </item>
+</root>
+
