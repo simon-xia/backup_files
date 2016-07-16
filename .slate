@@ -46,18 +46,22 @@ bind up:cmd       focus up
 bind down:cmd     focus down
 # bind up:cmd;alt   focus behind
 # bind down:cmd;alt focus behind
-bind 1:alt		  focus 'iTerm'
-bind 2:alt		  focus 'MacVim'
+bind =:alt		  focus 'iTerm'
 
-bind 9:alt		  focus 'Preview'
+bind v:alt		  focus 'MacVim'
+
+bind 8:alt		  focus 'Preview'
+bind 9:alt		  focus 'Finder'
 bind 0:alt		  focus 'Google Chrome'
 
 bind q:alt		  focus 'QQ'
-bind w:alt		  focus 'WizNote'
+bind w:alt		  focus 'WeChat'
+bind a:alt		  focus 'Atom'
+bind e:alt		  focus 'Leanote'
 bind d:alt		  focus 'Dash'
 
 # Window Hints
-bind esc:cmd hint
+bind esc:alt hint
 
 alias hyper alt 
 
@@ -94,4 +98,3 @@ bind n:${hyper} move ${bottomLeftQuarter}
 bind m:${hyper} move ${bottomRightQuarter}
 bind y:${hyper} move ${leftThird}
 bind p:${hyper} move ${rightThird}
-bind up:cmd       focus up
