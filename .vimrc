@@ -9,11 +9,14 @@ set cindent shiftwidth=4     " 自动缩进4空格
 set autoindent               " 自动对齐  
 
 "colorscheme wombat256_modified	
-"colorscheme gruvbox	
+colorscheme gruvbox	
 "colorscheme lucius_noLineNr
 "colorscheme lucius
-colorscheme Tomorrow-Night-Eighties
+"colorscheme Tomorrow-Night-Eighties
 "let g:lucius_no_term_bg=1 "transparent
+
+""set bg=light
+set bg=dark
 
 "colorscheme jellybeans	
 "let g:jellybeans_overrides = {
@@ -23,9 +26,9 @@ colorscheme Tomorrow-Night-Eighties
 "\}
 
 " terminal background transparent
-""highlight Normal ctermfg=252 ctermbg=NONE
-""highlight NonText ctermbg=none
-""highlight LineNr ctermbg=none
+hi Normal  ctermbg=none
+highlight NonText ctermbg=none
+highlight LineNr ctermbg=none
 
 set cursorline              " 突出显示当前行 
 set cursorcolumn
@@ -38,8 +41,7 @@ set cursorcolumn
 
 set hlsearch                 "搜索高亮
 set incsearch                "动态搜索高亮
-""set bg=light
-"set bg=dark
+
 "set guifont=Menlo\ Regular:h18
 "set guifont=Menlo:h12
 ""set t_Co=256       "256色
@@ -118,7 +120,9 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'majutsushi/tagbar'
 
 " fuzzy search file
-Plugin 'kien/ctrlp.vim'
+"Plugin 'kien/ctrlp.vim'
+Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/vimproc.vim'
 
 "for text filtering and alignment
 Plugin 'godlygeek/tabular'
@@ -132,6 +136,8 @@ Plugin 'fholgado/minibufexpl.vim'
 
 " indentLine
 Plugin 'Yggdroot/indentLine'
+
+Plugin 'simon-xia/vim-qlang'
 
 Plugin 'Lokaltog/vim-easymotion'
 
@@ -177,33 +183,36 @@ Plugin 'tpope/vim-surround.git'
 " Chinese input method
 Plugin 'ybian/smartim'
 
-Plugin 'jcf/vim-latex'
+Plugin 'terryma/vim-multiple-cursors'
 
+" Plugin 'jcf/vim-latex'
 
-" vim-numbertoggle
-let g:NumberToggleTrigger="<leader>z"
+Plugin 'vim-ctrlspace/vim-ctrlspace'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
+
+""""""""""""""
+" vim-numbertoggle
+""""""""""""""
+let g:NumberToggleTrigger="<leader>z"
+
+
+""""""""""""""
+" ctags
+""""""""""""""
 " 设置插件 indexer 调用 ctags 的参数
 " 默认 --c++-kinds=+p+l，重新设置为 --c++-kinds=+p+l+x+c+d+e+f+g+m+n+s+t+u+v
 " 默认 --fields=+iaS 不满足 YCM 要求，需改为 --fields=+iaSl
 let g:indexer_ctagsCommandLineOptions="--c++-kinds=+p+l+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q"
 
+
+""""""""""""""
 " YCM
+""""""""""""""
 let g:ycm_complete_in_comments=1  " 补全功能在注释中同样有效
 let g:ycm_complete_in_strings = 1   "在字符串输入中也能补全
 let g:ycm_collect_identifiers_from_tags_files=1  " 开启 YCM 基于标签引擎
@@ -223,28 +232,32 @@ let g:ycm_filetype_blacklist = {
       \}
 
 
+""""""""""""""
 " CtrlP
+""""""""""""""
 " exclude files and directories
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.in,*.out    " MacOSX/Linux
-set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+"set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.in,*.out    " MacOSX/Linux
+"set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
-let g:ctrlp_custom_ignore = { 
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links'}
+""let g:ctrlp_custom_ignore = { 
+""  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+""  \ 'file': '\v\.(exe|so|dll)$',
+""  \ 'link': 'some_bad_symbolic_links'}
+""
+""" working start directories
+""" 'c' - the directory of the current file.
+""" 'r' - the nearest ancestor that contains one of these directories or files: .git .hg .svn .bzr _darcs
+""" 'a' - like c, but only if the current working directory outside of CtrlP is not a direct ancestor of the directory of the current file.
+""" 0 or '' (empty string) - disable this feature.
+""let g:ctrlp_working_path_mode = 'ra'
+""
+""" display file list
+""let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
 
-" working start directories
-" 'c' - the directory of the current file.
-" 'r' - the nearest ancestor that contains one of these directories or files: .git .hg .svn .bzr _darcs
-" 'a' - like c, but only if the current working directory outside of CtrlP is not a direct ancestor of the directory of the current file.
-" 0 or '' (empty string) - disable this feature.
-let g:ctrlp_working_path_mode = 'ra'
 
-" display file list
-let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
-
-
+""""""""""""""
 " easygrep
+""""""""""""""
 let g:EasyGrepMode = 2     " All:0, Open Buffers:1, TrackExt:2, 
 let g:EasyGrepCommand = 0  " Use vimgrep:0, grepprg:1
 let g:EasyGrepRecursive  = 1 " Recursive searching
@@ -252,7 +265,9 @@ let g:EasyGrepIgnoreCase = 1 " not ignorecase:0
 let g:EasyMotion_smartcase = 1
 let g:EasyGrepFilesToExclude = "tags, *.bak, *~, cscope.*, *.a, *.o, *.pyc, *.bak"
 
+""""""""""""""
 " easy motion
+""""""""""""""
 nmap <Leader>1 <Plug>(easymotion-s)
 " two char
 nmap <Leader>2 <Plug>(easymotion-s2)
@@ -274,19 +289,24 @@ map <Leader>k <Plug>(easymotion-k)
 "map  <C-n> <Plug>(easymotion-next)
 "map  <C-n> <Plug>(easymotion-prev)
 
-"fold the code
-set foldenable
-autocmd FileType c,cpp,go  setl fdm=syntax | setl fen
-set foldlevel=100   "don't fold when start
+""""""""""""""
+"folding settings
+""""""""""""""
+set nofoldenable "don't fold by default
+"autocmd FileType c,cpp,go  setl fdm=syntax | setl fen
+set foldlevel=100
+set foldmethod=indent
+"let go_syntax_folding=1 
+
 " Enable folding with the spacebar
 nnoremap <space> za
 
 " Tabularize
-nmap <Leader>h= :Tabularize /=
-nmap <Leader>h: :Tabularize /:
-nmap <Leader>h:: :Tabularize /:\zs
-"nmap <Leader>h, :Tabularize /,
-nmap <Leader>h<Bar> :Tabularize /
+"nmap <Leader>h= :Tabularize /=
+"nmap <Leader>h: :Tabularize /:
+"nmap <Leader>h:: :Tabularize /:\zs
+""nmap <Leader>h, :Tabularize /,
+"nmap <Leader>h<Bar> :Tabularize /
 
 """"""""""""""""""""""""""""""
 " Quickfix
@@ -296,7 +316,9 @@ nmap <F6> :cn<cr>
 " next fault
 nmap <F7> :cp<cr>
 
+""""""""""""""""""""""""""""""
 " Tagbar
+""""""""""""""""""""""""""""""
 nmap <Leader>q :TagbarToggle<CR>
 " on MacOSX
 let g:tagbar_ctags_bin='/usr/local/bin/ctags'
@@ -307,15 +329,45 @@ let g:tagbar_ctags_bin='/usr/local/bin/ctags'
 ""end
 
 let g:tagbar_width=20
-let g:tagbar_left = 1           
+let g:tagbar_left = 0           
 
+let g:tagbar_type_go = {  
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+
+""""""""""""""
 " nerd tree
+""""""""""""""
 "nmap <Leader>t :NERDTreeToggle<CR>
-nmap <F10> :NERDTreeToggle<CR>
+nmap <C-\> :NERDTreeToggle<CR>
 " 设置NERDTree子窗口宽度
 let NERDTreeWinSize= 20
 " window's position
-let NERDTreeWinPos="right"
+let NERDTreeWinPos="left"
 " show hidden files
 let NERDTreeShowHidden=1
 " NERDTree 子窗口中不显示冗余帮助信息
@@ -323,7 +375,10 @@ let NERDTreeMinimalUI=1
 " 删除文件时自动删除文件对应 buffer
 let NERDTreeAutoDeleteBuffer=1
 
-" MiniBufExpl Colors
+""""""""""""""
+" MiniBufExpl
+""""""""""""""
+" Colors
 hi MBENormal               guifg=#808080 guibg=fg
 hi MBEChanged              guifg=#CD5907 guibg=fg
 hi MBEVisibleNormal        guifg=#5DC2D6 guibg=fg
@@ -336,6 +391,9 @@ nnoremap <C-S-h> :bN<CR>
 " change tab without write
 set hidden
 
+""""""""""""""
+" a.vim
+""""""""""""""
 " a.vim jump between *.c and *.h files
 "nnoremap <silent> <F12> :A<CR>
 "nnoremap <Leader>aa :A<CR>
@@ -434,13 +492,6 @@ function! SetColorColumn()
     endif
 endfunction
 
-" terminal cursor
-""if has("autocmd")
-""    au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
-""    au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
-""    au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
-""endif
-
 set t_Co=256
 
 "CSApprox plugin, make display in terminal the same as in GUI
@@ -469,23 +520,82 @@ vnoremap <C-S-x> "+x
 vnoremap <C-S-c> "+y
 vnoremap <C-S-v> "+p
 
-" maximise current window
+" maximise current pane
 noremap <C-W>f <C-W>_<C-W><Bar>
+
+
+""""""""""""""
+"vim-go
+""""""""""""""
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_interfaces = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
+let g:go_fmt_command = "goimports"
+
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 " go to golang definition
 au FileType go nmap <Leader>s <Plug>(go-def-split)
 au FileType go nmap <Leader>v <Plug>(go-def-vertical)
 au FileType go nmap <Leader>t <Plug>(go-def-tab)
 
-"vim-latex
-let g:tex_flavor='latex'
-set iskeyword+=:
 
+""""""""""""""
+" vim-multiple-cursor
+""""""""""""""
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-S-n>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
+
+
+""""""""""""""
+" unite.vim
+""""""""""""""
+"nnoremap <C-p> :Unite file_rec/async<cr>
+nnoremap <Leader>/ :Unite grep:.<cr>
+
+
+""""""""""""""
+" others
+""""""""""""""
 "set scrolloff=30
-
 
 " change cursor shape in ITerm2 on OS X"
 if $TERM_PROGRAM =~ "iTerm"
 	let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
 	let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
 endif
+
+
+
+""""""""""""""
+" ctrlspace
+""""""""""""""
+let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
+let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
+let g:CtrlSpaceSaveWorkspaceOnExit = 1
+
+"nnoremap <silent><C-p> :CtrlSpace O<CR>
+"nnoremap <silent><C-b> :CtrlSpace H<CR>
+"nnoremap <silent><C-m> :CtrlSpace B<CR>
+"nnoremap <silent><C-t> :CtrlSpace L<CR>
+
+nnoremap <Leader>p :CtrlSpace O<CR>
+nnoremap <Leader>b :CtrlSpace H<CR>
+nnoremap <Leader>m :CtrlSpace B<CR>
+nnoremap <Leader>l :CtrlSpace L<CR>
+
+if has("gui_running")
+	" Settings for MacVim and Inconsolata font
+	let g:CtrlSpaceSymbols = { "File": "◯", "CTab": "▣", "Tabs": "▢" }
+endif
+if executable("ag")
+	let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
+endif
+let g:CtrlSpaceSearchTiming = 500

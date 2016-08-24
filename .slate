@@ -46,19 +46,18 @@ bind up:cmd       focus up
 bind down:cmd     focus down
 # bind up:cmd;alt   focus behind
 # bind down:cmd;alt focus behind
-bind =:alt		  focus 'iTerm'
-
-bind v:alt		  focus 'MacVim'
-
+bind 1:alt		  focus 'iTerm'
+bind 2:alt		  focus 'Google Chrome'
 bind 8:alt		  focus 'Preview'
 bind 9:alt		  focus 'Finder'
-bind 0:alt		  focus 'Google Chrome'
 
+bind v:alt		  focus 'MacVim'
 bind q:alt		  focus 'QQ'
 bind w:alt		  focus 'WeChat'
 bind a:alt		  focus 'Atom'
 bind e:alt		  focus 'Leanote'
 bind d:alt		  focus 'Dash'
+bind o:alt		  focus 'Notes'
 
 # Window Hints
 bind esc:alt hint

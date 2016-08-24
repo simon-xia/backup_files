@@ -80,6 +80,35 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 #
+#
+#
+
+function upto() {
+	EXPRESSION="$1"
+	if [ -z "$EXPRESSION" ]; then
+		echo "A folder expression must be provided." >&2
+		return 1
+	fi
+	CURRENT_FOLDER="$(pwd)"
+	MATCHED_DIR=""
+	MATCHING=true
+
+	while [ "$MATCHING" = true ]; do
+		if [[ "$CURRENT_FOLDER" =~ "$EXPRESSION" ]]; then
+			MATCHED_DIR="$CURRENT_FOLDER"
+			CURRENT_FOLDER="$(dirname $CURRENT_FOLDER)"
+		else
+			MATCHING=false
+		fi
+	done
+	if [ -n "$MATCHED_DIR" ]; then
+		cd $MATCHED_DIR
+	else
+		echo "No Match." >&2
+		return 1
+	fi
+	
+}
 
 alias cls='clear'
 alias ll='ls -alF'
@@ -87,10 +116,12 @@ alias vi='vim'
 alias grep="grep --color=auto"
 alias h="history"
 alias rm="rm -i"
+alias cat="ccat --bg=dark"
 alias gcc99="gcc -std=c99"
 
 #tmux lose vim colorscheme
 alias tmux="TERM=screen-256color-bce tmux"
+DISABLE_AUTO_TITLE=true
 
 export LANG="zh_CN.UTF-8"
 export LC_ALL="zh_CN.UTF-8"
@@ -98,5 +129,39 @@ export LC_ALL="zh_CN.UTF-8"
 #my golang env
 export GOROOT=$HOME/go
 export GOBIN=$GOROOT/bin
-export GOPATH="$HOME/go3lib:$HOME/Myfruit/go-test"
 export PATH=$PATH:$GOBIN
+
+# switch GOPATH 
+golocalize () {
+	#gopath=(/home/$USER/Projects/Go/import $(dirname $PWD )) 
+	gopath=(/Users/simon/Myfruit/Go/imports $PWD) 
+	export GOPATH="${gopath[1]}:${gopath[2]}"
+	echo GOPATH is $GOPATH
+}
+
+export M2_HOME=/usr/local/apache-maven-3.0.5
+export PATH=$PATH:$M2_HOME/bin
+
+# mit scheme
+export PATH=$PATH:$HOME/tools/mit-scheme:/usr/local/aria2/bin
+
+#mactex, command: pdflatex
+export PATH=$PATH:/usr/texbin
+
+export PATH=$PATH:/usr/local/Cellar/mongodb/3.2.4/bin/
+export GO15VENDOREXPERIMENT=1
+
+# colorized man page 
+man() {
+    env \
+        LESS_TERMCAP_mb=$'\e[1;31m' \
+        LESS_TERMCAP_md=$'\e[1;31m' \
+        LESS_TERMCAP_me=$'\e[0m' \
+        LESS_TERMCAP_se=$'\e[0m' \
+        LESS_TERMCAP_so=$'\e[1;44;33m' \
+        LESS_TERMCAP_ue=$'\e[0m' \
+        LESS_TERMCAP_us=$'\e[1;32m' \
+            man "$@"
+}
+
+export PATH=$PATH:/Users/simon/Myfruit/Go/qiniu/kafka/FlameGraph
