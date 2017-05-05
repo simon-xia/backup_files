@@ -127,8 +127,8 @@ export LANG="zh_CN.UTF-8"
 export LC_ALL="zh_CN.UTF-8"
 
 #my golang env
-export GOROOT=$HOME/go
-export GOBIN=$GOROOT/bin
+export GOROOT=/usr/local/Cellar/go/1.8/libexec
+export GOBIN=/usr/local/Cellar/go/1.8/bin
 export PATH=$PATH:$GOBIN
 
 # switch GOPATH 
@@ -136,6 +136,13 @@ golocalize () {
 	#gopath=(/home/$USER/Projects/Go/import $(dirname $PWD )) 
 	gopath=(/Users/simon/Myfruit/Go/imports $PWD) 
 	export GOPATH="${gopath[1]}:${gopath[2]}"
+	echo GOPATH is $GOPATH
+}
+
+# append GOPATH
+appendgopath () {
+	#gopath=(/home/$USER/Projects/Go/import $(dirname $PWD )) 
+	export GOPATH=$GOPATH:$PWD
 	echo GOPATH is $GOPATH
 }
 
@@ -165,3 +172,14 @@ man() {
 }
 
 export PATH=$PATH:/Users/simon/Myfruit/Go/qiniu/kafka/FlameGraph
+
+alias vim="/usr/local/Cellar/vim/8.0.0002/bin/vim"
+alias vi="/usr/local/Cellar/vim/8.0.0002/bin/vim"
+
+#java
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+export PATH=$JAVA_HOME/bin:$PATH
+#export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home  
+#export PATH=$JAVA_HOME/bin:$PATH  
+#export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
+

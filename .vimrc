@@ -9,7 +9,7 @@ set cindent shiftwidth=4     " 自动缩进4空格
 set autoindent               " 自动对齐  
 
 "colorscheme wombat256_modified	
-colorscheme gruvbox	
+colorscheme rainbow_night_simon
 "colorscheme lucius_noLineNr
 "colorscheme lucius
 "colorscheme Tomorrow-Night-Eighties
@@ -33,8 +33,8 @@ highlight LineNr ctermbg=none
 set cursorline              " 突出显示当前行 
 set cursorcolumn
 " 设置高亮行列颜色
-":hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
-":hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+"hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+"hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 
 " \c to turn on or off
 ":nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
@@ -113,16 +113,18 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Shougo/neocomplete.vim'
 Plugin 'scrooloose/nerdtree'
 "Plugin 'corntrace/bufexplorer'
-Plugin 'scrooloose/nerdcommenter'
+
+"Plugin 'scrooloose/nerdcommenter'
 
 Plugin 'majutsushi/tagbar'
 
 " fuzzy search file
-"Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Shougo/unite.vim'
-Plugin 'Shougo/vimproc.vim'
+"Plugin 'Shougo/vimproc.vim'
 
 "for text filtering and alignment
 Plugin 'godlygeek/tabular'
@@ -131,18 +133,22 @@ Plugin 'godlygeek/tabular'
 Plugin 'kshenoy/vim-signature'
 
 " display tags to manage vim's buf
-Plugin 'fholgado/minibufexpl.vim'
-
+"Plugin 'fholgado/minibufexpl.vim'
+"Plugin 'ap/vim-buftabline'
 
 " indentLine
 Plugin 'Yggdroot/indentLine'
 
 Plugin 'simon-xia/vim-qlang'
+Plugin 'derekwyatt/vim-scala'
 
 Plugin 'Lokaltog/vim-easymotion'
 
 " Operator highlighting for C-like languages and more 
 Plugin 'vim-scripts/cSyntaxAfter'
+
+" git diff
+Plugin 'airblade/vim-gitgutter'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -167,7 +173,8 @@ Plugin 'vim-scripts/DrawIt'
 
 " golang
 Plugin 'fatih/vim-go'
-
+Plugin 'AndrewRadev/splitjoin.vim'
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
 "colorscheme  
 Plugin 'jonathanfilip/vim-lucius'
 Plugin 'flazz/vim-colorschemes'
@@ -185,9 +192,15 @@ Plugin 'ybian/smartim'
 
 Plugin 'terryma/vim-multiple-cursors'
 
+Plugin 'tpope/vim-fugitive'
 " Plugin 'jcf/vim-latex'
+"
+Plugin 'haya14busa/incsearch.vim'
 
-Plugin 'vim-ctrlspace/vim-ctrlspace'
+"Plugin 'vim-ctrlspace/vim-ctrlspace'
+"
+Plugin 'vim-airline/vim-airline'
+Plugin 'junegunn/fzf.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -221,10 +234,10 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 let g:ycm_show_diagnostics_ui = 0 "turn off diagnostics 
 let g:ycm_path_to_python_interpreter = '/usr/bin/python'
 "mapping
-nmap <Leader>gd :YcmDiags<CR>
-nnoremap <Leader>gl :YcmCompleter GoToDeclaration<CR>           " 跳转到申明处
-nnoremap <Leader>gg :YcmCompleter GoToDefinition<CR>            " 跳转到定义处
-nnoremap <Leader>ge :YcmCompleter GoToDefinitionElseDeclaration<CR>
+""nmap <Leader>gd :YcmDiags<CR>
+""nnoremap <Leader>gl :YcmCompleter GoToDeclaration<CR>           " 跳转到申明处
+""nnoremap <Leader>gg :YcmCompleter GoToDefinition<CR>            " 跳转到定义处
+""nnoremap <Leader>ge :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " 黑名单,不启用
 let g:ycm_filetype_blacklist = {
       \ 'tagbar' : 1,
@@ -236,24 +249,25 @@ let g:ycm_filetype_blacklist = {
 " CtrlP
 """"""""""""""
 " exclude files and directories
-"set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.in,*.out    " MacOSX/Linux
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.in,*.out    " MacOSX/Linux
 "set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
-""let g:ctrlp_custom_ignore = { 
-""  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-""  \ 'file': '\v\.(exe|so|dll)$',
-""  \ 'link': 'some_bad_symbolic_links'}
+let g:ctrlp_custom_ignore = { 
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll|swp|swo|DS_Store)$',
+  \ 'link': 'some_bad_symbolic_links'}
 ""
 """ working start directories
 """ 'c' - the directory of the current file.
 """ 'r' - the nearest ancestor that contains one of these directories or files: .git .hg .svn .bzr _darcs
 """ 'a' - like c, but only if the current working directory outside of CtrlP is not a direct ancestor of the directory of the current file.
 """ 0 or '' (empty string) - disable this feature.
-""let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_working_path_mode = 'ra'
 ""
 """ display file list
-""let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
+let g:ctrlp_user_command = 'find %s -type f'        " MacOSX/Linux
 
+nnoremap <Leader>ls :CtrlPBuffer<CR>
 
 """"""""""""""
 " easygrep
@@ -319,10 +333,10 @@ nmap <F7> :cp<cr>
 """"""""""""""""""""""""""""""
 " Tagbar
 """"""""""""""""""""""""""""""
-nmap <Leader>q :TagbarToggle<CR>
-" on MacOSX
-let g:tagbar_ctags_bin='/usr/local/bin/ctags'
-""if has("gui_macvim")
+map <Leader>q :TagbarToggle<CR>
+""" on MacOSX
+let g:tagbar_ctags_bin='/usr/local/Cellar/ctags/5.8_1/bin/ctags'
+""""if has("gui_macvim")
 ""	let g:tagbar_ctags_bin='/usr/local/bin/ctags'
 ""else
 ""	let g:tagbar_ctags_bin='/usr/bin/ctags'
@@ -375,7 +389,7 @@ let NERDTreeMinimalUI=1
 " 删除文件时自动删除文件对应 buffer
 let NERDTreeAutoDeleteBuffer=1
 
-""""""""""""""
+let NERDTreeIgnore = ['\.pyc$','\.swp$','\.swo$','\.DS_Store$',]
 " MiniBufExpl
 """"""""""""""
 " Colors
@@ -385,11 +399,12 @@ hi MBEVisibleNormal        guifg=#5DC2D6 guibg=fg
 hi MBEVisibleChanged       guifg=#F1266F guibg=fg
 hi MBEVisibleActiveNormal  guifg=#A6DB29 guibg=fg
 hi MBEVisibleActiveChanged guifg=#F1266F guibg=fg
-" change tab
+" change buf
 nnoremap <C-S-l> :bn<CR>
 nnoremap <C-S-h> :bN<CR>
 " change tab without write
 set hidden
+
 
 """"""""""""""
 " a.vim
@@ -414,21 +429,21 @@ let g:indentLine_char = '|'
 """"""""""""""""""""""""""""
 
 " autoload 
-let $CSCOPE_DB="/home/simon/cscope"
-if has("cscope")
-	set csprg=/usr/local/bin/cscope
-	set csto=0
-	set cst
-	set nocsverb
-	" add any database in current directory
-	if filereadable("cscope.out")
-		cs add cscope.out
-	" else add database pointed to by environment
-	elseif $CSCOPE_DB != ""
-		cs add $CSCOPE_DB."/".expand('%:h')."/cscope.out"
-	endif
-	set csverb
-endif		
+"let $CSCOPE_DB="/home/simon/cscope"
+"if has("cscope")
+"	set csprg=/usr/local/bin/cscope
+"	set csto=0
+"	set cst
+"	set nocsverb
+"	" add any database in current directory
+"	if filereadable("cscope.out")
+"		cs add cscope.out
+"	" else add database pointed to by environment
+"	elseif $CSCOPE_DB != ""
+"		cs add $CSCOPE_DB."/".expand('%:h')."/cscope.out"
+"	endif
+"	set csverb
+"endif		
 
 "function Do_CsTag()
 "    if(executable("cscope") && has("cscope") )
@@ -445,36 +460,36 @@ endif
 "endf
 
 
-nmap <C-\>e :scs find e <C-R>=expand("<cword>")<CR><CR>
-"find symbol
-nmap <C-\>s :scs find s <C-R>=expand("<cword>")<CR><CR>
-"nmap <C-\>s :tab split<CR>:cs find s <C-R>=expand("<cword>")<CR><CR>
-"find definition
-nmap <C-\>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
-"find who calls me
-nmap <C-\>c :scs find c <C-R>=expand("<cword>")<CR><CR>
-
-" find this string
-nmap <C-\>t :scs find t <C-R>=expand("<cword>")<CR><CR>
-
-" find the file
-nmap <C-\>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
-"find who include this file
-nmap <C-\>i :scs find i <C-R>=expand("<cfile>")<CR><CR>
-"find who i call
-nmap <C-\>d :scs find d <C-R>=expand("<cword>")<CR><CR>
-
-" search cscope and ctags simultaneously
-set cst
-
-" 0 for cscope first, 1 for ctags first
-set csto=0
-
-" display results in quickfix
-""set cscopequickfix=c-,d-,e-,g-,i-,s-,t-
-""nmap <Leader>s :cnext<CR>
-""nmap <Leader>w :cprev<CR> 
-
+"nmap <C-\>e :scs find e <C-R>=expand("<cword>")<CR><CR>
+""find symbol
+"nmap <C-\>s :scs find s <C-R>=expand("<cword>")<CR><CR>
+""nmap <C-\>s :tab split<CR>:cs find s <C-R>=expand("<cword>")<CR><CR>
+""find definition
+"nmap <C-\>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
+""find who calls me
+"nmap <C-\>c :scs find c <C-R>=expand("<cword>")<CR><CR>
+"
+"" find this string
+"nmap <C-\>t :scs find t <C-R>=expand("<cword>")<CR><CR>
+"
+"" find the file
+"nmap <C-\>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
+""find who include this file
+"nmap <C-\>i :scs find i <C-R>=expand("<cfile>")<CR><CR>
+""find who i call
+"nmap <C-\>d :scs find d <C-R>=expand("<cword>")<CR><CR>
+"
+"" search cscope and ctags simultaneously
+"set cst
+"
+"" 0 for cscope first, 1 for ctags first
+"set csto=0
+"
+"" display results in quickfix
+"""set cscopequickfix=c-,d-,e-,g-,i-,s-,t-
+"""nmap <Leader>s :cnext<CR>
+"""nmap <Leader>w :cprev<CR> 
+"
 
 " Insert current time
 " conflict with full screen F11
@@ -533,17 +548,56 @@ let g:go_highlight_structs = 1
 let g:go_highlight_interfaces = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_textobj_include_function_doc = 0
 
+"let g:go_fmt_command = "gofmt"
 let g:go_fmt_command = "goimports"
 
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
+"Show type info for the word under your curso
+au FileType go nmap <Leader>i <Plug>(go-info)
+" use gopath env from shell
+let g:go_autodetect_gopath = 0
 " go to golang definition
-au FileType go nmap <Leader>s <Plug>(go-def-split)
-au FileType go nmap <Leader>v <Plug>(go-def-vertical)
-au FileType go nmap <Leader>t <Plug>(go-def-tab)
+" Current valid options are: `[guru, godef]`
+let g:go_def_mode = 'guru'
 
+
+au FileType go nmap <Leader>ds <Plug>(go-def-split)
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+
+let g:go_decls_includes = "func,type"
+
+"Show a list of interfaces which is implemented by the type under your cursor with <leader>s
+au FileType go nmap <Leader>s <Plug>(go-implements)
+au FileType go nmap <Leader>rf :GoReferrers<CR>
+au FileType go nmap <Leader>cr :GoCallers<CR>
+au FileType go nmap <Leader>ce :GoCallees<CR>
+au FileType go nmap <Leader>cs :GoCallstack<CR>
+au FileType go nmap <Leader>cp :GoChannelPeers<CR>
+
+" change it to show a single tab as 4 space
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 
+
+" jump between *.go and *_test.go"
+autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
+
+au FileType go nmap <Leader>ff :GoDecls<CR>
+au FileType go nmap <Leader>fd :GoDeclsDir<CR>
+
+au FileType go nmap <Leader>fs :GoDefStack<CR>
+
+" go command status (requires vim-go)
+set statusline+=%#goStatuslineColor#
+set statusline+=%{go#statusline#Show()}
+set statusline+=%*
 
 """"""""""""""
 " vim-multiple-cursor
@@ -558,7 +612,7 @@ let g:multi_cursor_quit_key='<Esc>'
 " unite.vim
 """"""""""""""
 "nnoremap <C-p> :Unite file_rec/async<cr>
-nnoremap <Leader>/ :Unite grep:.<cr>
+"nnoremap <Leader>/ :Unite grep:.<cr>
 
 
 """"""""""""""
@@ -577,25 +631,129 @@ endif
 """"""""""""""
 " ctrlspace
 """"""""""""""
-let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
-let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
-let g:CtrlSpaceSaveWorkspaceOnExit = 1
+""let g:CtrlSpaceLoadLastWorkspaceOnStart = 1
+""let g:CtrlSpaceSaveWorkspaceOnSwitch = 1
+""let g:CtrlSpaceSaveWorkspaceOnExit = 1
+""
+""nnoremap <Leader>p :CtrlSpace O<CR>
+""nnoremap <Leader>b :CtrlSpace H<CR>
+""nnoremap <Leader>m :CtrlSpace B<CR>
+""nnoremap <Leader>l :CtrlSpace L<CR>
+""
+""let g:CtrlSpaceSearchTiming = 500
+""
+""set hidden
+""set wildignore=.git,.svn,CVS,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,*.pyc,tags,*.tags
+""
+""if has("gui_running")
+""  " Settings for MacVim and Inconsolata font
+""  let g:CtrlSpaceSymbols = { "File": "◯", "CTab": "▣", "Tabs": "▢" }
+""endif
+""
+""if executable("ag")
+""    let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
+""endif
+""
+""let g:CtrlSpaceIgnoredFiles = '\v(tmp|temp|Godeps)[\/]'
 
-"nnoremap <silent><C-p> :CtrlSpace O<CR>
-"nnoremap <silent><C-b> :CtrlSpace H<CR>
-"nnoremap <silent><C-m> :CtrlSpace B<CR>
-"nnoremap <silent><C-t> :CtrlSpace L<CR>
+""""""""""""""
+" gitgutter
+""""""""""""""
+set updatetime=250
 
-nnoremap <Leader>p :CtrlSpace O<CR>
-nnoremap <Leader>b :CtrlSpace H<CR>
-nnoremap <Leader>m :CtrlSpace B<CR>
-nnoremap <Leader>l :CtrlSpace L<CR>
 
-if has("gui_running")
-	" Settings for MacVim and Inconsolata font
-	let g:CtrlSpaceSymbols = { "File": "◯", "CTab": "▣", "Tabs": "▢" }
-endif
-if executable("ag")
-	let g:CtrlSpaceGlobCommand = 'ag -l --nocolor -g ""'
-endif
-let g:CtrlSpaceSearchTiming = 500
+
+""""""""""""""
+"neocomplete
+""""""""""""""
+" Enable autocompletion
+""set omnifunc=syntaxcomplete#Complete
+""" Select keyword as you type
+""set completeopt=longest,menuone
+""" Disable AutoComplPop.
+""let g:acp_enableAtStartup = 0
+""" Use neocomplete.
+""let g:neocomplete#enable_at_startup = 1
+""" Use smartcase.
+""let g:neocomplete#enable_smart_case = 1
+""" Set minimum syntax keyword length.
+""let g:neocomplete#sources#syntax#min_keyword_length = 3
+""let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+""
+""" Define dictionary.
+""let g:neocomplete#sources#dictionary#dictionaries = {
+""    \ 'default' : '',
+""    \ 'vimshell' : $HOME.'/.vimshell_hist',
+""    \ 'scheme' : $HOME.'/.gosh_completions'
+""        \ }
+""
+""" Define keyword.
+""if !exists('g:neocomplete#keyword_patterns')
+""    let g:neocomplete#keyword_patterns = {}
+""endif
+""let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+""inoremap <expr><C-g>     neocomplete#undo_completion()
+""inoremap <expr><C-l>     neocomplete#complete_common_string()
+""
+
+" AutoComplPop like behavior.
+"let g:neocomplete#enable_auto_select = 1
+
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+" Enable omni completion.
+""autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+""autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+""autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+""autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+""autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+""autocmd FileType go setlocal omnifunc=go#complete#Complete
+""" Enable heavy omni completion.
+""if !exists('g:neocomplete#sources#omni#input_patterns')
+""  let g:neocomplete#sources#omni#input_patterns = {}
+""endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+" For perlomni.vim setting.
+" https://github.com/c9s/perlomni.vim
+""let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
+"use mouse to do smooth scrolling
+set mouse=a
+
+" vim-fugitive
+"set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline():''}
+
+nnoremap <silent> <leader>gs :Gstatus<CR>
+nnoremap <silent> <leader>gd :Gdiff<CR>
+"nnoremap <silent> <leader>gc :Gcommit<CR>
+nnoremap <silent> <leader>gb :Gblame<CR>
+nnoremap <silent> <leader>gl :Glog<CR>
+"nnoremap <silent> <leader>gp :Git push<CR>
+"nnoremap <silent> <leader>gr :Gread<CR>
+"nnoremap <silent> <leader>gw :Gwrite<CR>
+nnoremap <silent> <leader>ge :Gedit<CR>
+" Mnemonic _i_nteractive
+"nnoremap <silent> <leader>gi :Git add -p %<CR>
+"nnoremap <silent> <leader>gg :SignifyToggle<CR>
+"
+
+set autoread
+
+" airline
+let g:airline#extensions#tabline#enabled = 1 
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+" incsearch
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
