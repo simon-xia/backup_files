@@ -49,7 +49,7 @@ plugins=(git)
 
 # User configuration
 
-export PATH="/usr/local/xmind:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export PATH="/Users/simon/.pyenv:/usr/local/xmind:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -127,15 +127,22 @@ export LANG="zh_CN.UTF-8"
 export LC_ALL="zh_CN.UTF-8"
 
 #my golang env
-export GOROOT=/usr/local/Cellar/go/1.8/libexec
-export GOBIN=/usr/local/Cellar/go/1.8/bin
+export GOROOT=/usr/local/Cellar/go/1.9.2/libexec
+export GOBIN=/usr/local/Cellar/go/1.9.2/bin
 export PATH=$PATH:$GOBIN
+# for vim-go
+export PATH=$PATH:/Users/simon/go/bin
 
 # switch GOPATH 
-golocalize () {
+gopathwithimport () {
 	#gopath=(/home/$USER/Projects/Go/import $(dirname $PWD )) 
 	gopath=(/Users/simon/Myfruit/Go/imports $PWD) 
 	export GOPATH="${gopath[1]}:${gopath[2]}"
+	echo GOPATH is $GOPATH
+}
+
+gopathhere () {
+	export GOPATH="$PWD"
 	echo GOPATH is $GOPATH
 }
 
@@ -144,6 +151,12 @@ appendgopath () {
 	#gopath=(/home/$USER/Projects/Go/import $(dirname $PWD )) 
 	export GOPATH=$GOPATH:$PWD
 	echo GOPATH is $GOPATH
+}
+
+qbuild () {
+	GOARCH=amd64 GOOS=linux go build -o $1 $2
+	scp $1 xiameng@10.88.0.1:~/
+	md5 $1
 }
 
 export M2_HOME=/usr/local/apache-maven-3.0.5
@@ -183,3 +196,16 @@ export PATH=$JAVA_HOME/bin:$PATH
 #export PATH=$JAVA_HOME/bin:$PATH  
 #export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar
 
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+export PATH="/Library/TeX/texbin:$PATH"
+
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# proxy list
+alias proxy='export all_proxy=socks5://127.0.0.1:1080'
+alias unproxy='unset all_proxy'
