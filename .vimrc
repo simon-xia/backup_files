@@ -9,9 +9,9 @@ set cindent shiftwidth=4     " 自动缩进4空格
 set autoindent               " 自动对齐  
 
 "colorscheme wombat256_modified	
-colorscheme rainbow_night_simon
+"colorscheme rainbow_night_simon
 "colorscheme lucius_noLineNr
-"colorscheme lucius
+colorscheme desert256
 "colorscheme Tomorrow-Night-Eighties
 "let g:lucius_no_term_bg=1 "transparent
 
@@ -98,121 +98,170 @@ elseif has("gui_win32")
 	set guifont=DejaVu_Sans_Mono:h1
 end
 
-""""""""""""""""""""""""""""
-"vundle setting
-""""""""""""""""""""""""""""
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
-"Plugin 'Shougo/neocomplete.vim'
-Plugin 'scrooloose/nerdtree'
-"Plugin 'corntrace/bufexplorer'
+""""""""""""""""""""""""""""
+" vim-plug
+""""""""""""""""""""""""""""
+" Automatic install vim-plug 
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-"Plugin 'scrooloose/nerdcommenter'
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
-Plugin 'majutsushi/tagbar'
+"Plug 'Valloric/YouCompleteMe'
+"Plug 'davidhalter/jedi-vim'
+"Plug 'Shougo/neocomplete.vim'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+
+"Plug 'corntrace/bufexplorer'
+
+"Plug 'scrooloose/nerdcommenter'
+
+Plug 'majutsushi/tagbar'
+Plug 'ludovicchabant/vim-gutentags'
 
 " fuzzy search file
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'Shougo/unite.vim'
-"Plugin 'Shougo/vimproc.vim'
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+"Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'Shougo/unite.vim'
+"Plug 'Shougo/vimproc.vim'
+
+" diff
+Plug 'mhinz/vim-signify'
 
 "for text filtering and alignment
-Plugin 'godlygeek/tabular'
+Plug 'godlygeek/tabular'
 
 " mark manager
-Plugin 'kshenoy/vim-signature'
+Plug 'kshenoy/vim-signature'
 
 " display tags to manage vim's buf
-"Plugin 'fholgado/minibufexpl.vim'
-"Plugin 'ap/vim-buftabline'
+"Plug 'fholgado/minibufexpl.vim'
+"Plug 'ap/vim-buftabline'
 
 " indentLine
-Plugin 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine'
 
-Plugin 'simon-xia/vim-qlang'
-Plugin 'derekwyatt/vim-scala'
+Plug 'derekwyatt/vim-scala'
 
-Plugin 'Lokaltog/vim-easymotion'
+Plug 'Lokaltog/vim-easymotion'
 
 " Operator highlighting for C-like languages and more 
-Plugin 'vim-scripts/cSyntaxAfter'
+Plug 'vim-scripts/cSyntaxAfter'
 
 " git diff
-Plugin 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-signify'
 
 " The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
+" Keep Plug commands between vundle#begin/end.
 " plugin on GitHub repo
  
 "jump between *.c and *.h files
-Plugin 'vim-scripts/a.vim'
+Plug 'vim-scripts/a.vim'
 
-Plugin 'vim-scripts/EasyGrep'
+Plug 'vim-scripts/EasyGrep'
 
 "keep the same color display in terminal as in GUI
-Plugin 'godlygeek/csapprox'
+Plug 'godlygeek/csapprox'
 
 "highlight c/c++ func"
-"Plugin 'octol/vim-cpp-enhanced-highlight'
+"Plug 'octol/vim-cpp-enhanced-highlight'
 
 " creat ASCII drawing
-Plugin 'vim-scripts/DrawIt'
+Plug 'vim-scripts/DrawIt'
 
 "C Call-Tree Explorer based on cscope
-"Plugin 'vim-scripts/CCTree'
+"Plug 'vim-scripts/CCTree'
 
 " golang
-Plugin 'fatih/vim-go'
-Plugin 'AndrewRadev/splitjoin.vim'
-Plugin 'nsf/gocode', {'rtp': 'vim/'}
+Plug 'fatih/vim-go'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'nsf/gocode', {'rtp': 'vim/'}
 "colorscheme  
-Plugin 'jonathanfilip/vim-lucius'
-Plugin 'flazz/vim-colorschemes'
+Plug 'jonathanfilip/vim-lucius'
+Plug 'flazz/vim-colorschemes'
 
 " relative number
-Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 " fix iterm bugs
-"Plugin 'sjl/vitality.vim'
+"Plug 'sjl/vitality.vim'
 
-Plugin 'tpope/vim-surround.git'
+"Plug 'tpope/vim-surround.git'
 
 " Chinese input method
-Plugin 'ybian/smartim'
+Plug 'ybian/smartim'
 
-Plugin 'terryma/vim-multiple-cursors'
+Plug 'terryma/vim-multiple-cursors'
 
-Plugin 'tpope/vim-fugitive'
-" Plugin 'jcf/vim-latex'
+Plug 'tpope/vim-fugitive'
+" Plug 'jcf/vim-latex'
 "
-Plugin 'haya14busa/incsearch.vim'
+Plug 'haya14busa/incsearch.vim'
 
-"Plugin 'vim-ctrlspace/vim-ctrlspace'
-"
-Plugin 'vim-airline/vim-airline'
-Plugin 'junegunn/fzf.vim'
+"Plug 'vim-ctrlspace/vim-ctrlspace'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" Put your non-Plugin stuff after this line
+" syntax check
+Plug 'w0rp/ale'
 
+Plug 'vim-airline/vim-airline'
+Plug 'tmhedberg/SimpylFold'
+Plug 'tell-k/vim-autopep8'
+
+" Initialize plugin system
+call plug#end()
 
 """"""""""""""
 " vim-numbertoggle
 """"""""""""""
 let g:NumberToggleTrigger="<leader>z"
 
+""""""""""""""
+" deoplete: auto complete
+""""""""""""""
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+
+""""""""""""""
+" ALE
+""""""""""""""
+let g:ale_linters_explicit = 1
+let g:ale_completion_delay = 500
+let g:ale_echo_delay = 20
+let g:ale_lint_delay = 500
+let g:ale_echo_msg_format = '[%linter%] %code: %%s'
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
+let g:airline#extensions#ale#enabled = 1
+
+let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
+let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
+let g:ale_c_cppcheck_options = ''
+let g:ale_cpp_cppcheck_options = ''
+
+let g:ale_sign_error = "\ue009\ue009"
+hi! clear SpellBad
+hi! clear SpellCap
+hi! clear SpellRare
+hi! SpellBad gui=undercurl guisp=red
+hi! SpellCap gui=undercurl guisp=blue
+hi! SpellRare gui=undercurl guisp=magenta
 
 """"""""""""""
 " ctags
@@ -221,28 +270,32 @@ let g:NumberToggleTrigger="<leader>z"
 " 默认 --c++-kinds=+p+l，重新设置为 --c++-kinds=+p+l+x+c+d+e+f+g+m+n+s+t+u+v
 " 默认 --fields=+iaS 不满足 YCM 要求，需改为 --fields=+iaSl
 let g:indexer_ctagsCommandLineOptions="--c++-kinds=+p+l+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q"
+set tags=./.tags;,.tags
 
 
 """"""""""""""
 " YCM
 """"""""""""""
-let g:ycm_complete_in_comments=1  " 补全功能在注释中同样有效
-let g:ycm_complete_in_strings = 1   "在字符串输入中也能补全
-let g:ycm_collect_identifiers_from_tags_files=1  " 开启 YCM 基于标签引擎
-let g:ycm_collect_identifiers_from_comments_and_strings = 1   "注释和字符串中的文字也会被收入补全
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+let g:ycm_add_preview_to_completeopt = 0
 let g:ycm_show_diagnostics_ui = 0 "turn off diagnostics 
-let g:ycm_path_to_python_interpreter = '/usr/bin/python'
-"mapping
-""nmap <Leader>gd :YcmDiags<CR>
-""nnoremap <Leader>gl :YcmCompleter GoToDeclaration<CR>           " 跳转到申明处
-""nnoremap <Leader>gg :YcmCompleter GoToDefinition<CR>            " 跳转到定义处
-""nnoremap <Leader>ge :YcmCompleter GoToDefinitionElseDeclaration<CR>
-" 黑名单,不启用
-let g:ycm_filetype_blacklist = {
-      \ 'tagbar' : 1,
-      \ 'gitcommit' : 1,
-      \}
+let g:ycm_server_log_level = 'info'
+let g:ycm_min_num_identifier_candidate_chars = 2
+let g:ycm_collect_identifiers_from_comments_and_strings = 1   "注释和字符串中的文字也会被收入补全
+let g:ycm_complete_in_strings=1
+let g:ycm_key_invoke_completion = '<c-z>'
+set completeopt=menu,menuone
+
+"let g:ycm_complete_in_comments=1  " 补全功能在注释中同样有效
+"let g:ycm_complete_in_strings = 1   "在字符串输入中也能补全
+"let g:ycm_collect_identifiers_from_tags_files=1  " 开启 YCM 基于标签引擎
+"map <C-]>  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+"noremap <c-z> <NOP>
+
+let g:ycm_semantic_triggers =  {
+           \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+           \ 'cs,lua,javascript': ['re!\w{2}'],
+           \ }
 
 
 """"""""""""""
@@ -581,7 +634,7 @@ au FileType go nmap <Leader>cs :GoCallstack<CR>
 au FileType go nmap <Leader>cp :GoChannelPeers<CR>
 
 " change it to show a single tab as 4 space
-autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
 
 " jump between *.go and *_test.go"
 autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
@@ -656,10 +709,6 @@ endif
 ""
 ""let g:CtrlSpaceIgnoredFiles = '\v(tmp|temp|Godeps)[\/]'
 
-""""""""""""""
-" gitgutter
-""""""""""""""
-set updatetime=250
 
 
 
@@ -748,12 +797,40 @@ nnoremap <silent> <leader>ge :Gedit<CR>
 
 set autoread
 
+""""""""""""""
 " airline
+""""""""""""""
 let g:airline#extensions#tabline#enabled = 1 
 let g:airline#extensions#tabline#buffer_nr_show = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 
+
+""""""""""""""
 " incsearch
+""""""""""""""
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
+
+""""""""""""""
+"gutentags
+""""""""""""""
+" gutentags 搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.hg', '.project']
+
+" 所生成的数据文件的名称
+let g:gutentags_ctags_tagfile = '.tags'
+
+" 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录
+let s:vim_tags = expand('~/.cache/tags')
+let g:gutentags_cache_dir = s:vim_tags
+
+" 配置 ctags 的参数
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+
+" 检测 ~/.cache/tags 不存在就新建
+if !isdirectory(s:vim_tags)
+   silent! call mkdir(s:vim_tags, 'p')
+endif
