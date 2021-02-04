@@ -1,0 +1,8 @@
+[user]
+	name = simon
+	email = simonxiaOMG@gmail.com
+
+[includeIf "gitdir:~/workCode/"]
+	path = ~/workCode/.gitconfig
+[core]
+	excludesFile = ~/.gitignore
