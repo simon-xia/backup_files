@@ -9,7 +9,7 @@ echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.bash_profile
 # install cask
 brew tap caskroom/cask
 
-brew cask install google-chrome iterm2
+brew cask install iterm2
 
 # install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
