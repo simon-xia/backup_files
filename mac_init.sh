@@ -41,6 +41,7 @@ brew install doctoc
 brew install fzf
 brew install htop
 brew install git
+brew install ncdu
 brew install pandoc
 brew install tmux
 brew install tree
@@ -53,3 +54,5 @@ git config --global user.name "simonxia"
 git config --global user.email "simonxiaOMG@gmail.com"
 git config --global core.excludesFile '~/.gitignore'
 
+# show hiden files in Finder
+defaults write com.apple.finder AppleShowAllFiles -boolean true ; killall Finder
