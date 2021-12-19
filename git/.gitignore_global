@@ -1,0 +1,226 @@
+*/.svn/
+logs
+*.log
+project/project
+project/target
+target
+tmp
+.history
+
+# IDEA
+.idea/
+/.idea
+
+
+
+/*.iml
+/out
+/.idea_modules
+/.classpath
+/.project
+/RUNNING_PID
+/.settings
+*.pydevproject
+.metadata
+.gradle
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+
+# Eclipse Core
+.project
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# CDT-specific
+.cproject
+
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+
+# Java annotation processor (APT)
+.factorypath
+
+# PDT-specific
+.buildpath
+
+# sbteclipse plugin
+.target
+
+# TeXlipse plugin
+.texlipse
+.gitignore
+.svn
+.swo
+.swp
+
+
+.DS_Store
+DUGABiBS1qbQXq7C.osl
+PrivateKey
+PublicKey
+
+*.iml
+projectFilesBackup/
+projectFilesBackup*/
+
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+hs_err_pid*
+
+
+
+# Created by https://www.gitignore.io/api/scala
+
+### Scala ###
+*.class
+*.log
+
+# sbt specific
+.cache
+.history
+.lib/
+dist/*
+target/
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/
+
+# Scala-IDE specific
+.scala_dependencies
+.worksheet
+
+*/BenchmarkList
+*/CompilerHints
+hoterran-mbp:Project hoterran$ cat ~/.gitignore_global
+hoterran-mbp:Project hoterran$ cat ~/.gitignore_global
+*/.svn/
+logs
+*.log
+project/project
+project/target
+target
+tmp
+.history
+.idea/
+/.idea
+/*.iml
+/out
+/.idea_modules
+/.classpath
+/.project
+/RUNNING_PID
+/.settings
+*.pydevproject
+.metadata
+.gradle
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+
+# Eclipse Core
+.project
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# CDT-specific
+.cproject
+
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
+
+# Java annotation processor (APT)
+.factorypath
+
+# PDT-specific
+.buildpath
+
+# sbteclipse plugin
+.target
+
+# TeXlipse plugin
+.texlipse
+.gitignore
+.svn
+.swo
+.swp
+
+
+.DS_Store
+DUGABiBS1qbQXq7C.osl
+PrivateKey
+PublicKey
+
+*.iml
+projectFilesBackup/
+projectFilesBackup*/
+
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+hs_err_pid*
+
+# Created by https://www.gitignore.io/api/scala
+
+### Scala ###
+*.class
+*.log
+
+# sbt specific
+.cache
+.history
+.lib/
+dist/*
+target/
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/
+
+# Scala-IDE specific
+.scala_dependencies
+.worksheet
+
+*/BenchmarkList
+*/CompilerHints
+
+# xlight project
+**/test.log*
+**/adrtbcore_ad_new.xml
+**/adrtbcore_search_ad_new.xml
